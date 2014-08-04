@@ -123,3 +123,4 @@ default['php']['configure_options'] = %W{--prefix=#{php['prefix_dir']}
 
 default['php']['ini']['template'] = "php.ini.erb"
 default['php']['ini']['cookbook'] = "php"
+default['php']['ini']['override_attributes'] = {}

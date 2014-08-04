@@ -28,3 +28,13 @@ template "#{node['php']['conf_dir']}/php.ini" do
 	end
 	variables(:directives => node['php']['directives'])
 end
+
+outdata = File.read("#{node['php']['conf_dir']}/php.ini")
+
+node['php']['ini']['override_attributes'].each do |key, value|
+  outdata = outdata.gsub(/^#{key}\s*=\s*[^$]+$/, "#{key} = #{value}")
+end
+
+File.open("#{node['php']['conf_dir']}/php.ini", 'w') do |out|
+  out << outdata
+end
